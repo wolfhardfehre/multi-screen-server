@@ -77,28 +77,6 @@ def change_shader():
     return f"Changed all screens to shader {shader}"
 
 
-@app.route("/screen_span")
-def screen_span():
-    """
-    Example: 192.168.1.9:5000/screen_span?mode=1
-
-    Possible Modes:
-        0 -> local
-        1 -> global
-        > 1 -> random
-    """
-    modes = ("local", "global", "random")
-    mode = request.args.get('mode')
-    if mode is None:
-        return "Please provide a span"
-    mode = int(mode)
-    for address in ADDRESSES:
-        tmp = mode if mode < 2 else randint(0, 1)
-        package = bytes([3, tmp])
-        sock.sendto(package, (address, UDP_PORT))
-    return f"Changed screen spans to {modes[mode]}"
-
-
 @app.route("/reset_time")
 def reset_time():
     """
@@ -137,6 +115,48 @@ def reset_times():
         if not synced:
             time.sleep(random())
     return f"Sync time off all screens: {synced}"
+
+
+@app.route("/screen_span")
+def screen_span():
+    """
+    Example: 192.168.1.9:5000/screen_span?mode=1
+
+    Possible Modes:
+        0 -> local
+        1 -> global
+        > 1 -> random
+    """
+    modes = ("local", "global", "random")
+    mode = request.args.get('mode')
+    if mode is None:
+        return "Please provide a span"
+    mode = int(mode)
+    for address in ADDRESSES:
+        tmp = mode if mode < 2 else randint(0, 1)
+        package = bytes([3, tmp])
+        sock.sendto(package, (address, UDP_PORT))
+    return f"Changed screen spans to {modes[mode]}"
+
+
+@app.route("/manual")
+def manual():
+    """
+    Example: 192.168.1.9:5000/manual?mode=1
+
+    Possible Modes:
+        0 -> manual mode
+        1 -> preset mode
+    """
+    modes = ["Manual Mode", "Preset Mode"]
+    mode = request.args.get('mode')
+    if mode is None:
+        return "Please provide a mode"
+    mode = int(mode)
+    for address in ADDRESSES:
+        package = bytes([4, mode])
+        sock.sendto(package, (address, UDP_PORT))
+    return f"Changed mode to {modes[mode]}"
 
 
 if __name__ == '__main__':

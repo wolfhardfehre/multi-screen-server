@@ -35,7 +35,8 @@ Select Shader | 1 | 0...∞
 Reset Time | 2 | 
 Use Local Span | 3 | 0
 Use Global Span | 3 | 1
-
+Manual Mode | 4 | 0
+Preset Mode | 4 | 1
 
 ## API Documentation
 
@@ -89,6 +90,18 @@ Resets | Name
 ---|---
 0 | Random
 1 | Synchronize 
+
+### Manual/Preset Mode
+Example
+
+        192.168.1.9:5000/manual?mode=1
+        
+Possible Modes
+
+Mode | Name
+---|---
+0 | manual mode
+1 | preset mode
 
 ## Control Virtual Env
 
