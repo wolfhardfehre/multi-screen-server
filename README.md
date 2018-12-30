@@ -15,6 +15,11 @@ Server to directly control a multi screen Raspberry Pi cluster.
 * Install libraries (from inside project folder)
 
         $ pip install -r requirements.txt
+        
+        
+## Save Dependencies
+
+        pip freeze --local | grep -v myapp > requirements.txt
 
 ## Run Server
 
@@ -31,6 +36,60 @@ Select Shader | 1 | 0...∞
 Reset Time | 2 | 
 Use Local Span | 3 | 0
 Use Global Span | 3 | 1
+
+
+## API Documentation
+
+### Change Shader
+Example
+
+        127.0.0.1:5000/change_shader?shader=3
+        
+Possible Shader
+
+| Shader | Name |
+| ---|--- |
+| 0 | Ren |
+| 1 | Stimpy | 
+| 2 | Pinky |
+| 3 | Brain |
+
+### Change Screen Span
+Example
+
+        127.0.0.1:5000/screen_span?mode=1
+        
+Possible Modes
+
+Mode | Name
+---|---
+0 | Local
+1 | Global 
+> 1 | Random
+
+### Single Time Reset
+Example
+
+        127.0.0.1:5000/reset_time?screen=2
+        
+Possible Screens
+
+Screen | Name
+---|---
+0 | All
+1...∞ | Specific Screen 
+
+### Reset Times
+Example
+
+        127.0.0.1:5000/reset_times?synced=1
+        
+Possible Modes
+
+Resets | Name
+---|---
+0 | Random
+1 | Synchronize 
 
 ## Control Virtual Env
 

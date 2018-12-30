@@ -1,8 +1,8 @@
 #! /usr/bin/python3
 import socket
+from app import UDP_PORT, ADDRESSES
 
-UDP_IP = "127.0.0.1"
-UDP_PORT = 5005
+UDP_IP = ADDRESSES[0]
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
 
