@@ -9,7 +9,7 @@ from flask import request
 
 app = Flask(__name__)
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
+SERVER_IP = "192.168.1.9"
 UDP_PORT = 8888
 ADDRESSES = [
     "127.0.0.1",
@@ -37,7 +37,7 @@ def index():
 @app.route("/toggle_screen")
 def toggle_screen():
     """
-    Example: 127.0.0.1:5000/toggle_screen?on=1&screen=1
+    Example: 192.168.1.9:5000/toggle_screen?on=1&screen=1
 
     Possibilities:
         0 -> Off
@@ -60,7 +60,7 @@ def toggle_screen():
 @app.route("/change_shader")
 def change_shader():
     """
-    Example: 127.0.0.1:5000/change_shader?shader=3
+    Example: 192.168.1.9:5000/change_shader?shader=3
 
     Possible Shader:
         0 -> Ren
@@ -80,7 +80,7 @@ def change_shader():
 @app.route("/screen_span")
 def screen_span():
     """
-    Example: 127.0.0.1:5000/screen_span?mode=1
+    Example: 192.168.1.9:5000/screen_span?mode=1
 
     Possible Modes:
         0 -> local
@@ -102,7 +102,7 @@ def screen_span():
 @app.route("/reset_time")
 def reset_time():
     """
-    Example: 127.0.0.1:5000/reset_time?screen=2
+    Example: 192.168.1.9:5000/reset_time?screen=2
 
     Possible Screens:
         0 -> all
@@ -121,7 +121,7 @@ def reset_time():
 @app.route("/reset_times")
 def reset_times():
     """
-    Example: 127.0.0.1:5000/reset_times?synced=1
+    Example: 192.168.1.9:5000/reset_times?synced=1
 
     Possible Resets:
         0 -> random
@@ -137,3 +137,7 @@ def reset_times():
         if not synced:
             time.sleep(random())
     return f"Sync time off all screens: {synced}"
+
+
+if __name__ == '__main__':
+    app.run(host=SERVER_IP, port=5000)

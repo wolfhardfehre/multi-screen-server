@@ -23,8 +23,7 @@ Server to directly control a multi screen Raspberry Pi cluster.
 
 ## Run Server
 
-        $ FLASK_APP=app.py flask run
-
+        $ python3 app.py
 
 ## UDP Communication Protocol
  
@@ -43,7 +42,7 @@ Use Global Span | 3 | 1
 ### Change Shader
 Example
 
-        127.0.0.1:5000/change_shader?shader=3
+        192.168.1.9:5000/change_shader?shader=3
         
 Possible Shader
 
@@ -57,7 +56,7 @@ Possible Shader
 ### Change Screen Span
 Example
 
-        127.0.0.1:5000/screen_span?mode=1
+        192.168.1.9:5000/screen_span?mode=1
         
 Possible Modes
 
@@ -70,7 +69,7 @@ Mode | Name
 ### Single Time Reset
 Example
 
-        127.0.0.1:5000/reset_time?screen=2
+        192.168.1.9:5000/reset_time?screen=2
         
 Possible Screens
 
@@ -82,7 +81,7 @@ Screen | Name
 ### Reset Times
 Example
 
-        127.0.0.1:5000/reset_times?synced=1
+        192.168.1.9:5000/reset_times?synced=1
         
 Possible Modes
 
