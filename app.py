@@ -1,4 +1,5 @@
 #! /usr/bin/python3
+import _thread
 import socket
 import time
 import markdown2
@@ -88,7 +89,7 @@ def reset_time():
     """
     screen = request.args.get('screen')
     if screen is None:
-        return "Please provide an info if you want to sync times and which screen you choose"
+        return "Please provide a screen"
     address = ADDRESSES[int(screen)]
     package = bytes([2])
     sock.sendto(package, (address, UDP_PORT))
@@ -109,12 +110,16 @@ def reset_times():
     if synced is None:
         return "Please provide an info if you want to sync times"
     synced = bool(int(synced))
+    _thread.start_new_thread(reset_times_of_addresses, (synced,))
+    return f"Sync time off all screens: {synced}"
+
+
+def reset_times_of_addresses(synced):
     for address in ADDRESSES:
         package = bytes([2])
         sock.sendto(package, (address, UDP_PORT))
         if not synced:
             time.sleep(random())
-    return f"Sync time off all screens: {synced}"
 
 
 @app.route("/screen_span")
