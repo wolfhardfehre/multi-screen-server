@@ -35,8 +35,6 @@ Select Shader | 1 | 0...∞
 Reset Time | 2 | 
 Use Local Span | 3 | 0
 Use Global Span | 3 | 1
-Manual Mode | 4 | 0
-Preset Mode | 4 | 1
 
 ## API Documentation
 
